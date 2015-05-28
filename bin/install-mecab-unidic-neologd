@@ -1,0 +1,265 @@
+#!/usr/bin/env bash
+
+# Copyright (C) 2015 Toshinori Sato (@overlast)
+#
+#       https://github.com/neologd/mecab-unidic-neologd
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+BASEDIR=$(cd $(dirname $0);pwd)
+PROGRAM_NAME=install-mecab-unidic-neologd
+ECHO_PREFIX="[${PROGRAM_NAME}] :"
+
+VERSION="install-mecab-unidic-neologd version 0.0.1"
+
+usage() {
+    echo "Usage: $PROGRAM_NAME [OPTIONS]"
+    echo "  This script is the installer of mecab-unidic-neologd"
+    echo
+    echo "Options:"
+    echo "  -h, --help"
+    echo
+    echo "  -v, --version"
+    echo
+    echo "  -p, --prefix /PATH/TO/INSTALL/DIRECTORY"
+    echo "     Set any directory path where you want to install"
+    echo
+    echo "  -y, --forceyes"
+    echo "     If you want to install regardless of the result of test"
+    echo
+    echo "  -u, --asuser"
+    echo "     If you want to install to the user directory as an user"
+    echo
+    echo "  -n, --newest"
+    echo "     If you want to update mecab-unidic-neologd"
+    echo
+    echo "  --min_surface_length INT_VALUE"
+    echo "     If you want to delete the entries whose length of surface is shorter than INT_VALUE"
+    echo
+    echo "  --max_surface_length INT_VALUE"
+    echo "     If you want to delete the entries whose length of surface is longer than INT_VALUE"
+    echo
+    echo "  --min_baseform_length INT_VALUE"
+    echo "     If you want to delete the entries whose length of base form is shorter than INT_VALUE"
+    echo
+    echo "  --max_baseform_length INT_VALUE"
+    echo "     If you want to delete the entries whose length of base form is longer than INT_VALUE"
+    echo
+    echo "  --create_user_dic"
+    echo "     If you want to create an user dictionary using seed data of mecab-unidic-neologd"
+    echo
+    exit 1
+}
+
+INSTALL_PATH_PREFIX=""
+IS_FORCE_YES=0
+IS_AS_USER=0
+WANNA_UPDATE=0
+MIN_SURFACE_LEN=0
+MAX_SURFACE_LEN=0
+MIN_BASEFORM_LEN=0
+MAX_BASEFORM_LEN=0
+WANNA_CREATE_USER_DIC=0
+
+for OPT in "$@"
+do
+    case "$OPT" in
+        '-h'|'--help' )
+            usage
+            exit 1
+            ;;
+        '-v'|'--version' )
+            echo $VERSION
+            exit 1
+            ;;
+        '-p'|'--prefix' )
+            if [[ -z "$2" ]] || [[ "$2" =~ ^-+ ]]; then
+                echo "${PROGRAM_NAME}: option requires an argument -- $1" 1>&2
+                usage
+                exit 1
+            fi
+            INSTALL_PATH_PREFIX="$2"
+            shift 2
+            ;;
+        '-y'|'--forceyes' )
+            IS_FORCE_YES=1
+            shift 1
+            ;;
+        '-u'|'--asuser' )
+            IS_AS_USER=1
+            shift 1
+            ;;
+        '-n'|'--newest' )
+            WANNA_UPDATE=1
+            shift 1
+            ;;
+        '--create_user_dic' )
+            WANNA_CREATE_USER_DIC=1
+            shift 1
+            ;;
+        '--min_surface_length' )
+            if [[ -z "$2" ]] || [[ "$2" =~ ^-+ ]]; then
+                echo "${PROGRAM_NAME}: option requires an argument -- $1" 1>&2
+                usage
+                exit 1
+            fi
+            MIN_SURFACE_LEN="$2"
+            shift 2
+            ;;
+        '--max_surface_length' )
+            if [[ -z "$2" ]] || [[ "$2" =~ ^-+ ]]; then
+                echo "${PROGRAM_NAME}: option requires an argument -- $1" 1>&2
+                usage
+                exit 1
+            fi
+            MAX_SURFACE_LEN="$2"
+            shift 2
+            ;;
+        '--min_baseform_length' )
+            if [[ -z "$2" ]] || [[ "$2" =~ ^-+ ]]; then
+                echo "${PROGRAM_NAME}: option requires an argument -- $1" 1>&2
+                usage
+                exit 1
+            fi
+            MIN_BASEFORM_LEN="$2"
+            shift 2
+            ;;
+        '--max_baseform_length' )
+            if [[ -z "$2" ]] || [[ "$2" =~ ^-+ ]]; then
+                echo "${PROGRAM_NAME}: option requires an argument -- $1" 1>&2
+                usage
+                exit 1
+            fi
+            MAX_BASEFORM_LEN="$2"
+            shift 2
+            ;;
+        -*)
+            echo "${PROGRAM_NAME}: illegal option -- '$(echo $1 | sed 's/^-*//')'" 1>&2
+            usage
+            exit 1
+            ;;
+        *)
+            if [[ ! -z "$1" ]] && [[ ! "$1" =~ ^-+ ]]; then
+                #param=( ${param[@]} "$1" )
+                param+=( "$1" )
+                shift 1
+            fi
+            ;;
+    esac
+done
+
+if [ ${MIN_SURFACE_LEN} -gt 0 -o ${MAX_SURFACE_LEN} -gt 0 ]; then
+    if [ ${MIN_SURFACE_LEN} -ge ${MAX_SURFACE_LEN} ]; then
+        echo "${ECHO_PREFIX} Can't set inconsistent values: MIN_SURFACE_LEN(${MIN_SURFACE_LEN}) >= MAX_SURFACE_LEN(${MAX_SURFACE_LEN})"
+        usage
+        exit 1
+    fi
+fi
+if [ ${MIN_BASEFORM_LEN} -gt 0 -o ${MAX_BASEFORM_LEN} -gt 0 ]; then
+    if [ ${MIN_BASEFORM_LEN} -ge ${MAX_BASEFORM_LEN} ]; then
+        echo "${ECHO_PREFIX} Can't set inconsistent values: MIN_BASEFORM_LEN(${MIN_BASEFORM_LEN}) >= MAX_BASEFORM_LEN(${MAX_BASEFORM_LEN})"
+        usage
+        exit 1
+    fi
+fi
+
+echo "$ECHO_PREFIX Start.."
+
+echo "$ECHO_PREFIX Check the exists of libraries"
+COMMANDS=(find sort head cut egrep mecab mecab-config make curl sed cat diff tar unxz xargs grep iconv)
+for COMMAND in ${COMMANDS[@]};do
+    if [ ! `which ${COMMAND}` ]; then
+        echo "$ECHO_PREFIX ${COMMAND} is not found."
+        exit 1
+    else
+        echo "$ECHO_PREFIX ${COMMAND} => ok"
+    fi
+done
+
+if [ ${WANNA_UPDATE} = 1 ]; then
+    echo
+    echo "$ECHO_PREFIX Get the newest updated information using git"
+    cd ${BASEDIR}/../
+    git fetch origin
+    git reset --hard origin/master
+    git pull
+fi
+
+if [ -z ${INSTALL_PATH_PREFIX} ]; then
+    INSTALL_PATH_PREFIX=`mecab-config --dicdir`"/mecab-unidic-neologd"
+fi
+
+
+echo ""
+echo "$ECHO_PREFIX mecab-unidic-neologd will be install to ${INSTALL_PATH_PREFIX}"
+echo ""
+sleep 3
+
+echo "$ECHO_PREFIX Make mecab-unidic-neologd"
+${BASEDIR}/../libexec/make-mecab-unidic-neologd.sh -p ${INSTALL_PATH_PREFIX} -s ${MIN_SURFACE_LEN} -l ${MAX_SURFACE_LEN} -S ${MIN_BASEFORM_LEN} -L ${MAX_BASEFORM_LEN} -u ${WANNA_CREATE_USER_DIC}
+
+if [ $? != 0 ]; then
+    echo ""
+    echo "$ECHO_PREFIX Failed to make mecab-unidic-neologd"
+    exit 1
+fi
+
+function wanna_install(){
+    while true;do
+        echo ""
+        echo "$ECHO_PREFIX Please check the list of differences in the upper part."
+        echo ""
+        echo "$ECHO_PREFIX Do you want to install mecab-unidic-neologd? Type yes or no."
+        read answer
+        case $answer in
+            yes)
+                return 0
+                ;;
+            no)
+                echo "$ECHO_PREFIX Quit from installing process"
+                echo "$ECHO_PREFIX Finish.."
+                exit
+                ;;
+            *)
+                echo -e "cannot understand $answer.\n"
+                ;;
+        esac
+    done
+}
+
+if [ ${IS_FORCE_YES} -eq 0 ]; then
+
+    echo "$ECHO_PREFIX Get results of tokenize test"
+    ${BASEDIR}/../libexec/test-mecab-unidic-neologd.sh
+
+    if [ $? != 0 ]; then
+        echo ""
+        echo "$ECHO_PREFIX Failed to test mecab-unidic-neologd"
+        echo "$ECHO_PREFIX If you want to skip the test, you can use '-y' or '--forceyes' option"
+        usage
+        exit 1
+    fi
+
+    wanna_install
+fi
+
+echo "$ECHO_PREFIX OK. Let's install mecab-unidic-neologd."
+${BASEDIR}/../libexec/install-mecab-unidic-neologd.sh -p ${INSTALL_PATH_PREFIX} -u ${IS_AS_USER}
+
+if [ $? != 0 ]; then
+    echo ""
+    echo "$ECHO_PREFIX Failed to install mecab-unidic-neologd"
+    exit 1
+fi
+
+echo "$ECHO_PREFIX Finish.."
