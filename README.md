@@ -152,8 +152,8 @@ $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
         - This word parsed as a single word because of updating of the language resources on Web.
 - Almost all of the entry of mecab-unidic-neologd has the value of furigana field.
 
-### When you use default system dictionary
-    $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab
+### When you use unidic-mecab 2.1.2
+    $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/unidic
 
 ## To evaluate or to reproduce a research result
 We release the tag for mainly research purpose.
