@@ -2,7 +2,7 @@
 
 # Copyright (C) 2015 Toshinori Sato (@overlast)
 #
-#       https://github.com/neologd/mecab-ipadic-neologd
+#       https://github.com/neologd/mecab-unidic-neologd
 #
 # Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 # you may not use this file except in compliance with the License.
