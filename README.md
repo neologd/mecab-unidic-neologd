@@ -1,4 +1,4 @@
-# mecab-unidic-NEologd : Neologism dictionary for MeCab
+# mecab-unidic-NEologd : Neologism dictionary for unidic-mecab
 
 ## For Japanese
 README.ja.md is written in Japanese.

@@ -1,4 +1,4 @@
-# mecab-unidic-NEologd : Neologism dictionary for MeCab
+# mecab-unidic-NEologd : Neologism dictionary for unidic-mecab
 
 ## 詳細な情報
 mecab-unidic-neologd に関する詳細な情報(サンプルコードなど)は以下の Wiki に書いてあります。
@@ -254,7 +254,7 @@ mecab-unidic-neologd を使いたいときは、MeCab の -d オプションに�
 もしも mecab-unidic-NEologd を論文から参照して下さる場合は、以下の bibtex をご利用ください。
 
     @misc{sato2015mecabunidicneologd,
-        title  = {Neologism dictionary based on the language resources on the Web for mecab-unidic},
+        title  = {Neologism dictionary based on the language resources on the Web for unidic-mecab},
         author = {Toshinori, Sato},
         url    = {https://github.com/neologd/mecab-unidic-neologd},
         year   = {2015}
