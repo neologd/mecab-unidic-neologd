@@ -26,10 +26,10 @@ When you build a feature vector of text data using UniDic or do text mining usin
     - I'm planning to renew this dictionary in monthly beginning of the month and middle of the month.
 - When renewing by utilizing the language resources on Web, a new named entity can be recorded.
     - The resources are being utilized at present are as follows.
-        - Dump data of hatena keyword
-        - Japanese postal code number data download (ken_all.lzh)
-        - The name-of-the-station list of the Japan whole country
-        - The entry data of the person name (last name / first name)
+        - [Dump data of hatena keyword](http://developer.hatena.ne.jp/ja/documents/keyword/misc/catalog)
+        - [Japanese postal code number data download (ken_all.lzh)](http://www.post.japanpost.jp/zipcode/download.html)
+        - [The name-of-the-station list of the Japan whole country](http://www5a.biglobe.ne.jp/~harako/data/station.htm)
+        - [The entry data of the person name (last name / first name)](http://togetter.com/li/111529)
         - All manually annotated entry data for Unicode emoji
         - A lot of documents, which crawled from Web
     - I'm planning to record the words such as the named entity, which will be extracted from other new language resource.
@@ -144,6 +144,39 @@ $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
 ## Example of output of MeCab
 ### When you use mecab-unidic-neologd
     $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd
+    10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。
+    1       イチ    イチ    一      名詞-数詞
+    0       ゼロ    ゼロ    ゼロ-zero       名詞-数詞
+    日      カ      カ      日      接尾辞-名詞的-助数詞
+    放送    ホーソー        ホウソウ        放送    名詞-普通名詞-サ変可能
+    の      ノ      ノ      の      助詞-格助詞
+    「                      「      補助記号-括弧開
+    中居正広のミになる図書館        ナカイマサヒロノミニナルトショカン      ナカイマサヒロノミニナルトショカン      中居正広のミになる図書館        名詞-固有名詞-一般
+    」                      」      補助記号-括弧閉
+    （                      （      補助記号-括弧開
+    テレビ朝日      テレビアサヒ    テレビアサヒ    テレビ朝日      名詞-固有名詞-一般
+    系      ケー    ケイ    系      接尾辞-名詞的-一般
+    ）                      ）      補助記号-括弧閉
+    で      デ      デ      で      助詞-格助詞
+    、                      、      補助記号-読点
+    SMAP    スマップ        スマップ        SMAP    名詞-固有名詞-一般
+    の      ノ      ノ      の      助詞-格助詞
+    中居正広        ナカイマサヒロ  ナカイマサヒロ  中居正広        名詞-固有名詞-人名-一般
+    が      ガ      ガ      が      助詞-接続助詞
+    、                      、      補助記号-読点
+    篠原信一        シノハラシンイチ        シノハラシンイチ        篠原信一        名詞-固有名詞-人名-一般
+    の      ノ      ノ      の      助詞-格助詞
+    過去    カコ    カコ    過去    名詞-普通名詞-副詞可能
+    の      ノ      ノ      の      助詞-格助詞
+    勘違い  カンチガイ      カンチガイ      勘違い  名詞-普通名詞-サ変可能
+    を      オ      ヲ      を      助詞-格助詞
+    明かす  アカス  アカス  明かす  動詞-一般       五段-サ行       連体形-一般
+    一幕    ヒトマク        ヒトマク        一幕    名詞-普通名詞-一般
+    が      ガ      ガ      が      助詞-格助詞
+    あっ    アッ    アル    有る    動詞-非自立可能 五段-ラ行       連用形-促音便
+    た      タ      タ      た      助動詞  助動詞-タ       終止形-一般
+    。                      。      補助記号-句点
+    EOS
 
 #### What's the point of the above result
 
@@ -154,6 +187,52 @@ $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
 
 ### When you use unidic-mecab 2.1.2
     $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/unidic
+    10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。
+    1       イチ    イチ    一      名詞-数詞
+    0       ゼロ    ゼロ    ゼロ-zero       名詞-数詞
+    日      カ      カ      日      接尾辞-名詞的-助数詞
+    放送    ホーソー        ホウソウ        放送    名詞-普通名詞-サ変可能
+    の      ノ      ノ      の      助詞-格助詞
+    「                      「      補助記号-括弧開
+    中居    ナカイ  ナカイ  ナカイ  名詞-固有名詞-人名-姓
+    正広    マサヒロ        マサヒロ        マサヒロ        名詞-固有名詞-人名-名
+    の      ノ      ノ      の      助詞-格助詞
+    ミ      ミ      ミ      ミ      記号-一般
+    に      ニ      ニ      に      助詞-格助詞
+    なる    ナル    ナル    成る    動詞-非自立可能 五段-ラ行       連体形-一般
+    図書    トショ  トショ  図書    名詞-普通名詞-一般
+    館      カン    カン    館      接尾辞-名詞的-一般
+    」                      」      補助記号-括弧閉
+    （                      （      補助記号-括弧開
+    テレビ  テレビ  テレビ  テレビ-television       名詞-普通名詞-一般
+    朝日    アサヒ  アサヒ  朝日    名詞-普通名詞-一般
+    系      ケー    ケイ    系      接尾辞-名詞的-一般
+    ）                      ）      補助記号-括弧閉
+    で      デ      デ      で      助詞-格助詞
+    、                      、      補助記号-読点
+    S       エス    エス    Ｓ      記号-文字
+    M       エム    エム    Ｍ      記号-文字
+    A       エー    エー    Ａ      記号-文字
+    P       ピー    ピー    Ｐ      記号-文字
+    の      ノ      ノ      の      助詞-格助詞
+    中居    ナカイ  ナカイ  ナカイ  名詞-固有名詞-人名-姓
+    正広    マサヒロ        マサヒロ        マサヒロ        名詞-固有名詞-人名-名
+    が      ガ      ガ      が      助詞-格助詞
+    、                      、      補助記号-読点
+    篠原    シノハラ        シノハラ        シノハラ        名詞-固有名詞-人名-姓
+    信一    シンイチ        シンイチ        シンイチ        名詞-固有名詞-人名-名
+    の      ノ      ノ      の      助詞-格助詞
+    過去    カコ    カコ    過去    名詞-普通名詞-副詞可能
+    の      ノ      ノ      の      助詞-格助詞
+    勘違い  カンチガイ      カンチガイ      勘違い  名詞-普通名詞-サ変可能
+    を      オ      ヲ      を      助詞-格助詞
+    明かす  アカス  アカス  明かす  動詞-一般       五段-サ行       連体形-一般
+    一幕    ヒトマク        ヒトマク        一幕    名詞-普通名詞-一般
+    が      ガ      ガ      が      助詞-格助詞
+    あっ    アッ    アル    有る    動詞-非自立可能 五段-ラ行       連用形-促音便
+    た      タ      タ      た      助動詞  助動詞-タ       終止形-一般
+    。                      。      補助記号-句点
+    EOS
 
 ## To evaluate or to reproduce a research result
 We release the tag for mainly research purpose.
