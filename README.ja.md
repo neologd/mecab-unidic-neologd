@@ -1,0 +1,190 @@
+# mecab-unidic-NEologd : Neologism dictionary for MeCab
+
+## 詳細な情報
+mecab-unidic-neologd に関する詳細な情報(サンプルコードなど)は以下の Wiki に書いてあります。
+
+- https://github.com/neologd/mecab-unidic-neologd/wiki/Home.ja
+
+## mecab-unidic-neologd とは
+mecab-unidic-neologd は、UniDic に多数のWeb上の言語資源から得た新語や固有表現、絵文字などのエントリを足してシステム辞書としてインストールするためのシードデータとスクリプト群です。
+
+シードデータの性質上、構築されるシステム辞書には国語研短単位の条件を満たさないエントリも入ります。
+
+あらかじめご了承ください。
+
+機械学習用の特徴ベクトル生成やテキストマイニングをするために UniDic を使用する際には、このツールも併用することをオススメします。
+
+## 特徴
+### 利点
+- UniDic には含まれていない固有表現などの語の表層(表記)とフリガナの組を約167万組(重複エントリを含む)採録しています
+- この辞書の更新は開発サーバ上で自動的におこなわれます
+    - 毎月月初と中旬に更新する予定です
+- Web上の言語資源を活用しているので、更新時に新しい固有表現を採録できます
+    - 現在使用している資源は以下のとおりです
+        - はてなキーワードのダンプデータ
+        - 郵便番号データダウンロード
+        - 日本全国駅名一覧のコーナー
+        - 人名(姓/名)エントリデータ
+        - Unicode 6.0 以下の絵文字に手作業で読み仮名を付与したデータ
+        - Web からクロールした大量の文書データ
+    - 今後も他の新たな言語資源から抽出した固有表現などの語を採録する予定です
+
+### 欠点
+- 国語研短単位の条件を満たさないエントリも入る
+- 固有表現の分類が不十分です
+    - 例えば一部の人名と製品名が同じ固有表現カテゴリに分類されています
+- 固有表現では無い語も固有表現として登録されています
+- 固有表現の表記とフリガナの対応づけを間違っている場合があります
+    - すべての固有表現とフリガナの組に対する人手による検査を実施していないためです
+- Web上の資源が更新されないなら、新しい固有表現は辞書に追加されません
+- 対応している文字コードは UTF-8 のみです
+    - インストール済みの MeCab が使用している unidic が UTF-8 版である必要があります
+
+## 使用開始
+### 動作に必要なもの
+
+インストール時に mecab-unidic をベースにビルド処理をするために必要なライブラリがあります。
+
+apt、yum や homebrew でインストールするか、自前でコンパイルしてインストールして下さい。
+
+- C++ コンパイラ
+    - GCC-4.4.7 と Apple LLVM version 6.0 で動作を確認しています
+- iconv (libiconv)
+    - 辞書のコード変換に使います
+- mecab
+    - MeCab 本体です
+    - bin/mecab と bin/mecab-config を使います
+- mecab-unidic
+    - MeCab 用の辞書のひとつです
+        - インストール時のテストに使います
+        - ソースコードからインストールするときは以下の手順で文字コードを UTF-8 インストールして下さい
+
+    cd mecab-unidic-neologd
+    sudo ./libexec/install-mecab-unidic.sh
+
+または
+
+    ./configure; make; sudo make install
+
+- xz
+    - mecab-unidic-neologd のシードの解凍に unxz を使います
+
+他にも足りないものがあったら適時インストールして下さい。
+
+#### 例
+- CentOS の場合
+
+    $ cd mecab-unidic-neologd
+    $ sudo ./libexec/install-mecab-unidic.sh
+    $ sudo yum install mecab mecab-unidic git make curl xz
+
+- Fedora の場合
+
+    $ cd mecab-unidic-neologd
+    $ sudo ./libexec/install-mecab-unidic.sh
+    $ sudo yum install mecab mecab-devel mecab-unidic git make curl xz
+
+- Ubuntu の場合
+
+    $ cd mecab-unidic-neologd
+    $ sudo ./libexec/install-mecab-unidic.sh
+    $ sudo aptitude install mecab libmecab-dev mecab-unidic-utf8 git make curl xz-utils
+
+- Mac OSX の場合
+
+    $ brew install mecab mecab-unidic git curl xz
+
+### mecab-unidic-neologd をインストールする準備
+
+辞書の元になるデータの配布と更新は GitHub 経由で行います。
+
+初回は以下のコマンドでgit cloneしてください。
+
+    $ git clone --depth 1 https://github.com/neologd/mecab-unidic-neologd.git
+
+または
+
+    $ git clone --depth 1 git@github.com:neologd/mecab-unidic-neologd.git
+
+もしも、リポジトリの全変更履歴を入手したい方は「--depth 1」を消してcloneして下さい。
+
+全変更履歴のデータサイズは変動しますが、ピーク時は約 1GB となり、かなり大容量ですのでご注意下さい。
+
+### mecab-unidic-neologd のインストール/更新
+#### Step.1
+上記の準備でcloneしたリポジトリに移動します。
+
+    $ cd mecab-unidic-neologd
+
+#### Step.2
+以下のコマンドを実行するとインストール、または、上書きによる最新版への更新ができます。
+
+    $ ./bin/install-mecab-unidic-neologd -n
+
+インストール先はオプション未指定の場合 mecab-config に従って決まります。
+
+以下のコマンドを実行すると確認できます。
+
+    $ echo `mecab-config --dicdir`"/mecab-unidic-neologd"
+
+複数の MeCab をインストールしている場合は、任意の mecab-config にパスを通して下さい。
+
+任意の path にインストールしたい場合や、user 権限でインストールする際のオプションなどは以下で確認できます。
+
+    $ ./bin/install-mecab-unidic-neologd -h
+
+### mecab-unidic-neologd の使用方法
+mecab-unidic-neologd を使いたいときは、MeCab の -d オプションにカスタムシステム辞書のパス(例: */lib/mecab/dic/mecab-unidic-neologd/)を指定してください。
+
+#### 例 (CentOS 上でインストールした場合)
+
+    $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
+
+## MeCabの実行結果の例
+### mecab-unidic-neologd をシステム辞書として使った場合
+    $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd
+
+#### どこに効果が出ている?
+- Mecab は mecab-unidic-neologd に収録された語をひとつの語として分割しました
+    - 「中居正広のミになる図書館」は2011年後半に生まれた新しい語です
+        - この語はWeb上の言語資源が更新されたのでひとつの語として分割されました
+- mecab-unidic-neologd に収録されているほとんどの語にフリガナが付いています
+
+### 標準のシステム辞書(unidic-2.7.0)を使った場合
+    $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab
+
+## 研究結果の評価や再現などに使いたい場合
+以下に更新を止めた辞書をリリースしています。
+
+- https://github.com/neologd/mecab-unidic-neologd/releases/
+
+以下の用途でご利用いただく場合は便利でしょう。
+
+- 研究結果の評価実験
+- 他人の研究結果の再現
+- 永遠に更新しない形態素解析結果の作成
+
+言語処理を始めたばかりの方や上記以外の多くの用途には master branch の最新版の使用を推奨します。
+
+## 今後の発展
+継続して開発しますので、気になるところはどんどん改善されます。
+
+ユーザの8割が気になる部分を優先して改善します。
+
+## Bibtex
+
+もしも mecab-unidic-NEologd を論文から参照して下さる場合は、以下の bibtex をご利用ください。
+
+    @misc{sato2015mecabunidicneologd,
+        title  = {Neologism dictionary based on the language resources on the Web for mecab-unidic},
+        author = {Toshinori, Sato},
+        url    = {https://github.com/neologd/mecab-unidic-neologd},
+        year   = {2015}
+    }
+
+## Copyrights
+Copyright (c) 2015 Toshinori Sato (@overlast) All rights reserved.
+
+ライセンスは Apache License, Version 2.0 です。下記をご参照下さい。
+
+- https://github.com/neologd/mecab-unidic-neologd/blob/master/COPYING
