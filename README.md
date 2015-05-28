@@ -11,11 +11,13 @@ You can find more detailed documentation and examples in the following wiki.
 - https://github.com/neologd/mecab-unidic-neologd/wiki/Home
 
 ## Overview
-mecab-unidic-neologd is customized system dictionary for MeCab.
+mecab-unidic-neologd is a set of a seed data of system dictionary for adding entries to unidic-mecab and scripts to install the synthesized dictionary as a system dictionary of MeCab.
 
-This dictionary includes many neologisms (new word), which are extracted from many language resources on the Web.
+Due to the nature of the seed data of system dictionary, the synthesized dictionary includes entries that do not satisfy the condition of Short Unit Word of National Institute for Japanese Language and Linguistics.
 
-When you analyze the Web documents, it's better to use this system dictionary and default UniDic together.
+We appreciate your understanding.
+
+When you build a feature vector of text data using UniDic or do text mining using UniDic, it's better to use UniDic and mecab-unidic-NEologd together.
 
 ## Pros and Cons
 ### Pros
@@ -33,6 +35,7 @@ When you analyze the Web documents, it's better to use this system dictionary an
     - I'm planning to record the words such as the named entity, which will be extracted from other new language resource.
 
 ### Cons
+- Includes entries that do not satisfy the condition of Short Unit Word of National Institute for Japanese Language and Linguistics.
 - Classification of the named entity is insufficient
     - Ex. Some person names and a product name are classified into the same named entity category.
 - Not named entity word is recorded as named entity too.
@@ -144,9 +147,9 @@ $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
 
 #### What's the point of the above result
 
-- MeCab can parse the words which are recorded in mecab-unidic-neologd correctly.
+- MeCab parsed the words which are recorded in mecab-unidic-neologd as a sinble word.
     - "中居正広のミになる図書館(Masahiro Nakai's library to improve an ability)" is a new word.
-        - This word could parse correctly because of updating of the language resources on Web.
+        - This word parsed as a single word because of updating of the language resources on Web.
 - Almost all of the entry of mecab-unidic-neologd has the value of furigana field.
 
 ### When you use default system dictionary

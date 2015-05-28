@@ -6,13 +6,13 @@ mecab-unidic-neologd に関する詳細な情報(サンプルコードなど)は
 - https://github.com/neologd/mecab-unidic-neologd/wiki/Home.ja
 
 ## mecab-unidic-neologd とは
-mecab-unidic-neologd は、UniDic に多数のWeb上の言語資源から得た新語や固有表現、絵文字などのエントリを足してシステム辞書としてインストールするためのシードデータとスクリプト群です。
+mecab-unidic-neologd は、UniDic に多数のWeb上の言語資源から得た新語や固有表現、絵文字などのエントリを足して MeCab のシステム辞書としてインストールするためのシードデータとスクリプト群のセットです。
 
 シードデータの性質上、構築されるシステム辞書には国語研短単位の条件を満たさないエントリも入ります。
 
 あらかじめご了承ください。
 
-機械学習用の特徴ベクトル生成やテキストマイニングをするために UniDic を使用する際には、このツールも併用することをオススメします。
+UniDic を使用してテキストデータから特徴ベクトルを生成する際や、UniDic を使用してテキストマイニングをする際には、 UniDic と mecab-unidic-NEologd を併用すると便利です。
 
 ## 特徴
 ### 利点
