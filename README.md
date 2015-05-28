@@ -59,7 +59,13 @@ You should install following libraries using apt or yum, homebrew, source-code.
         - Use to test at the time of installation
         - If you install it using source code, you should select the UTF-8 as a character code
 
-    ./configure --with-charset=utf8; make; sudo make install
+
+    cd mecab-unidic-neologd
+    sudo ./libexec/install-mecab-unidic.sh
+
+or
+
+    ./configure; make; sudo make install
 
 - xz
     - Use to decompress a xz package of a seed of mecab-unidic-neologd
@@ -69,21 +75,23 @@ Please install at any time other lack library.
 #### Examples
 - On CentOS
 
-    $ cd mecab-unidic-neologd
-    $ sudo ./libexec/install-mecab-unidic.sh
-    $ sudo yum install mecab mecab-unidic git make curl xz
+    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+
+    $ sudo yum install mecab git make curl xz
 
 - On Fedora
 
+    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+
     $ cd mecab-unidic-neologd
-    $ sudo ./libexec/install-mecab-unidic.sh
-    $ sudo yum install mecab mecab-devel mecab-unidic git make curl xz
+
+    $ sudo yum install mecab mecab-devel git make curl xz
 
 - On Ubuntu
 
-    $ cd mecab-unidic-neologd
-    $ sudo ./libexec/install-mecab-unidic.sh
-    $ sudo aptitude install mecab libmecab-dev mecab-unidic-utf8 git make curl xz-utils
+    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+
+    $ sudo aptitude install mecab libmecab-dev git make curl xz-utils
 
 - On MacOSX
 

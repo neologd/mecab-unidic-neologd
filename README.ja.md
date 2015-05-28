@@ -59,8 +59,7 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
         - インストール時のテストに使います
         - ソースコードからインストールするときは以下の手順で文字コードを UTF-8 インストールして下さい
 
-    cd mecab-unidic-neologd
-    sudo ./libexec/install-mecab-unidic.sh
+    cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
 
 または
 
@@ -74,21 +73,21 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
 #### 例
 - CentOS の場合
 
-    $ cd mecab-unidic-neologd
-    $ sudo ./libexec/install-mecab-unidic.sh
-    $ sudo yum install mecab mecab-unidic git make curl xz
+    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+
+    $ sudo yum install mecab git make curl xz
 
 - Fedora の場合
 
-    $ cd mecab-unidic-neologd
-    $ sudo ./libexec/install-mecab-unidic.sh
-    $ sudo yum install mecab mecab-devel mecab-unidic git make curl xz
+    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+
+    $ sudo yum install mecab mecab-devel git make curl xz
 
 - Ubuntu の場合
 
-    $ cd mecab-unidic-neologd
-    $ sudo ./libexec/install-mecab-unidic.sh
-    $ sudo aptitude install mecab libmecab-dev mecab-unidic-utf8 git make curl xz-utils
+    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+
+    $ sudo aptitude install mecab libmecab-dev git make curl xz-utils
 
 - Mac OSX の場合
 
