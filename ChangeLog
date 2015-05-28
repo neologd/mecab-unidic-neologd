@@ -1,0 +1,6 @@
+# Release 20150529-01
+
+### New seed data
+* seed/mecab-user-dict-seed.20150528.csv.xz
+	execute: Initial commit
+	commit: https://github.com/neologd/mecab-unidic-neologd/commit/368992df09b868fa56e4dd233850d3404b2c37b0
