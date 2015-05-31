@@ -199,7 +199,6 @@ if [ -z ${INSTALL_PATH_PREFIX} ]; then
     INSTALL_PATH_PREFIX=`mecab-config --dicdir`"/mecab-unidic-neologd"
 fi
 
-
 echo ""
 echo "$ECHO_PREFIX mecab-unidic-neologd will be install to ${INSTALL_PATH_PREFIX}"
 echo ""
