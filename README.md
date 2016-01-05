@@ -260,7 +260,7 @@ Please use the following bibtex, when you refer mecab-unidic-NEologd from your p
     }
 
 ## Copyrights
-Copyright (c) 2015 Toshinori Sato (@overlast) All rights reserved.
+Copyright (c) 2015-2016 Toshinori Sato (@overlast) All rights reserved.
 
 We select the 'Apache License, Version 2.0'. Please check following link.
 
