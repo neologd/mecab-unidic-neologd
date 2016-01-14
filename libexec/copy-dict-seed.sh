@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2015 Toshinori Sato (@overlast)
+# Copyright (C) 2015-2016 Toshinori Sato (@overlast)
 #
 #       https://github.com/neologd/mecab-unidic-neologd
 #
@@ -17,6 +17,7 @@
 # limitations under the License.
 
 set -e
+
 
 BASEDIR=$(cd $(dirname $0);pwd)
 ECHO_PREFIX="[copy-dict-seed] :"
