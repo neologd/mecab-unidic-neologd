@@ -16,6 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+
 TMP_DIR_PATH=/var/tmp/build-unidic-mecab
 MECAB_UNIDIC_VERSION=2.1.2
 MECAB_UNIDIC_DIR_NAME=unidic-mecab-${MECAB_UNIDIC_VERSION}_src
