@@ -16,7 +16,7 @@
 
 ### New seed data
 * seed/mecab-user-dict-seed.20160107.csv.xz
-	execute: Aperiodic data update on 2016-01-07(Thu)
+	execute: Periodic data update on 2016-01-07(Thu)
 	commit: https://github.com/neologd/mecab-unidic-neologd/commit/8e56fbe854a50d6af8fa5c45a6b840972bb50333
 
 # Release 20160104-01
@@ -30,7 +30,7 @@
 
 ### New seed data
 * seed/mecab-user-dict-seed.20151231.csv.xz
-	execute: Aperiodic data update on 2015-12-31(Thu)
+	execute: Periodic data update on 2015-12-31(Thu)
 	commit: https://github.com/neologd/mecab-unidic-neologd/commit/41dc303c486eaee9ea69a5bcb182246a3ba51bc6
 
 # Release 2015128-01
@@ -44,7 +44,7 @@
 
 ### New seed data
 * seed/mecab-user-dict-seed.20151224.csv.xz
-	execute: Aperiodic data update on 2015-12-24(Thu)
+	execute: Periodic data update on 2015-12-24(Thu)
 	commit: https://github.com/neologd/mecab-unidic-neologd/commit/944a50d53de058de1410d481cc6f679d21be7fbb
 
 # Release 2015121-01
