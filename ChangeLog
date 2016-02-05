@@ -1,3 +1,10 @@
+# Release 20160205-01
+
+### New seed data
+* seed/mecab-user-dict-seed.20160205.csv.xz
+	execute: Delete entries of a string that expressed a unit
+	commit: https://github.com/neologd/mecab-unidic-neologd/commit/1265f4d7cd84ada8d9174a333a18fefdcaf5521c
+
 # Release 20160204-01
 
 ### New seed data
