@@ -17,6 +17,7 @@
 # limitations under the License.
 
 set -e
+set -u
 
 TMP_DIR_PATH=/var/tmp/build-unidic-mecab
 MECAB_UNIDIC_VERSION=2.1.2
