@@ -17,6 +17,7 @@
 # limitations under the License.
 
 set -e
+set -u
 
 BASEDIR=$(cd $(dirname $0);pwd)
 PROGRAM_NAME=install-mecab-unidic-neologd
@@ -73,6 +74,7 @@ MIN_BASEFORM_LEN=0
 MAX_BASEFORM_LEN=0
 WANNA_CREATE_USER_DIC=0
 
+set +u
 for OPT in "$@"
 do
     case "$OPT" in
@@ -159,6 +161,7 @@ do
             ;;
     esac
 done
+set -u
 
 if [ ${MIN_SURFACE_LEN} -gt 0 -o ${MAX_SURFACE_LEN} -gt 0 ]; then
     if [ ${MIN_SURFACE_LEN} -ge ${MAX_SURFACE_LEN} ]; then
