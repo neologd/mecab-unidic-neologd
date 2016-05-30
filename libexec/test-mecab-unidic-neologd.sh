@@ -16,6 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+set -u
+
 BASEDIR=$(cd $(dirname $0);pwd)
 ECHO_PREFIX="[test-mecab-unidic-neologd] :"
 
@@ -62,7 +65,10 @@ echo "$ECHO_PREFIX Get difference between default system dictionary and mecab-un
 
 cat /tmp/buzz_phrase| mecab -Owakati -d ${MECAB_DIC_DIR}/unidic > /tmp/buzz_phrase_tokenized_using_defdic
 cat /tmp/buzz_phrase| mecab -Owakati -d ${MECAB_UNIDIC_DIR} > /tmp/buzz_phrase_tokenized_using_neologismdic
+
+set +e
 /usr/bin/diff -y -W60 --side-by-side --suppress-common-lines /tmp/buzz_phrase_tokenized_using_defdic /tmp/buzz_phrase_tokenized_using_neologismdic > /tmp/buzz_phrase_tokenized_diff
+set -e
 
 if [ -s /tmp/buzz_phrase_tokenized_diff ]; then
     echo "$ECHO_PREFIX Tokenize phrase using default system dictionary"
@@ -74,7 +80,9 @@ if [ -s /tmp/buzz_phrase_tokenized_diff ]; then
     cat /tmp/buzz_phrase| mecab -Owakati -d ${MECAB_UNIDIC_DIR} >> /tmp/buzz_phrase_tokenized_using_neologismdic
 
     echo "$ECHO_PREFIX Get result of diff"
+    set +e
     /usr/bin/diff -y -W60 --side-by-side --suppress-common-lines /tmp/buzz_phrase_tokenized_using_defdic /tmp/buzz_phrase_tokenized_using_neologismdic > /tmp/buzz_phrase_tokenized_diff
+    set -e
 
     echo "$ECHO_PREFIX Please check difference between default system dictionary and mecab-unidic-neologd"
     echo ""
