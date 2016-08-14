@@ -13,7 +13,7 @@ addons:
     packages:
     - mecab
     - libmecab-dev
-    - mecab-ipadic-utf8
+    - unidic-mecab
     - git
     - make
     - curl
