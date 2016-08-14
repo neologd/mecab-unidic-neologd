@@ -1,0 +1,27 @@
+language: bash
+
+notifications:
+ email: false
+
+before_install:
+ - mkdir ./target
+
+cache: apt
+
+addons:
+  apt:
+    packages:
+    - mecab
+    - libmecab-dev
+    - mecab-ipadic-utf8
+    - git
+    - make
+    - curl
+    - xz-utils
+    - file
+
+install:
+ - bash ./libexec/make-mecab-unidic-neologd.sh -p /home/travis/build/neologd/mecab-unidic-neologd/target/neologd-travisci -s 0 -l 0 -S 0 -L 0 -u 0
+
+script:
+ - bash ./libexec/test-mecab-unidic-neologd.sh
