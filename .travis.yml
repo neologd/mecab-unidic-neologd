@@ -13,7 +13,6 @@ addons:
     packages:
     - mecab
     - libmecab-dev
-    - unidic-mecab
     - git
     - make
     - curl
@@ -21,6 +20,7 @@ addons:
     - file
 
 install:
+ - sudo ./libexec/install-mecab-unidic.sh
  - bash ./libexec/make-mecab-unidic-neologd.sh -p /home/travis/build/neologd/mecab-unidic-neologd/target/neologd-travisci -s 0 -l 0 -S 0 -L 0 -u 0
 
 script:
