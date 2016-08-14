@@ -1,4 +1,5 @@
 # mecab-unidic-NEologd : Neologism dictionary for unidic-mecab
+[![Build Status](https://travis-ci.org/neologd/mecab-unidic-neologd.svg?branch=master)](https://travis-ci.org/neologd/mecab-unidic-neologd)
 
 ## For Japanese
 README.ja.md is written in Japanese.
