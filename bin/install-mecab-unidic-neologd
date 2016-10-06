@@ -182,7 +182,7 @@ fi
 echo "$ECHO_PREFIX Start.."
 
 echo "$ECHO_PREFIX Check the existance of libraries"
-COMMANDS=(find sort head cut egrep mecab mecab-config make curl sed cat diff tar unzip unxz xargs grep iconv)
+COMMANDS=(find sort head cut egrep mecab mecab-config make curl sed cat diff tar unzip unxz xargs grep iconv patch which file openssl)
 for COMMAND in ${COMMANDS[@]};do
     if [ ! `which ${COMMAND}` ]; then
         echo "$ECHO_PREFIX ${COMMAND} is not found."
@@ -193,12 +193,34 @@ for COMMAND in ${COMMANDS[@]};do
 done
 
 if [ ${WANNA_UPDATE} = 1 ]; then
+    STATUS_CODE=`curl --insecure -IL https://github.com -s -w '%{http_code}\n' -o /dev/null`
+    if [ ${STATUS_CODE} = 200 ]; then
+        IS_NETWORK_ONLINE=1
+    else
+        echo "$ECHO_PREFIX Unable to access https://github.com/"
+        echo "$ECHO_PREFIX     Status code : ${STATUS_CODE}"
+        echo "$ECHO_PREFIX Update error, please retry after re-connecting to network"
+        echo "$ECHO_PREFIX Or you can try to install without updating option(-n)"
+        echo "$ECHO_PREFIX     \$ ./bin/install-mecab-unidic-neologd"
+        exit 1
+    fi
+
     echo
-    echo "$ECHO_PREFIX Get the newest updated information using git"
     cd ${BASEDIR}/../
-    git fetch origin
-    git reset --hard origin/master
-    git pull
+    if [ `git log refs/heads/master --pretty=%H | head -1` = `git ls-remote origin -h refs/heads/master | cut -f1` ]; then
+        echo "$ECHO_PREFIX mecab-unidic-NEologd is already up-to-date"
+    else
+        echo
+        echo "$ECHO_PREFIX Get the newest updated information using git"
+        git fetch origin
+        git reset --hard origin/master
+    fi
+else
+    echo "$ECHO_PREFIX You should execute the following command if you want to install newest version of mecab-unidic-NEologd"
+    echo
+    echo "    $ bin/install-mecab-unidic-neologd -n"
+    echo
+    sleep 3
 fi
 
 if [ -z ${INSTALL_PATH_PREFIX} ]; then
