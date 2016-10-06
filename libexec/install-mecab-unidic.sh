@@ -45,8 +45,7 @@ echo "${ECHO_PREFIX} Get ${MECAB_UNIDIC_FILE_NAME}"
 curl --insecure -L "${MECAB_UNIDIC_URL}" -o ${MECAB_UNIDIC_FILE_NAME}
 
 echo "${ECHO_PREFIX} Extract ${MECAB_UNIDIC_FILE_NAME}"
-unzip ${MECAB_UNIDIC_FILE_NAME}
-
+unzip -o ${MECAB_UNIDIC_FILE_NAME}
 
 echo "${ECHO_PREFIX} Execute configure and make"
 cd ${MECAB_UNIDIC_DIR_NAME}
