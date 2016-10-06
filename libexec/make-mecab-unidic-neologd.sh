@@ -73,7 +73,7 @@ if [ -e ${NEOLOGD_DIC_DIR} ]; then
     rm -rf ${NEOLOGD_DIC_DIR}
 fi
 
-unzip ${BASEDIR}/../build/${ORG_DIC_NAME}.zip -d ${BASEDIR}/../build/
+unzip -o ${BASEDIR}/../build/${ORG_DIC_NAME}.zip -d ${BASEDIR}/../build/
 mv ${BASEDIR}/../build/${ORG_DIC_NAME} ${NEOLOGD_DIC_NAME}
 
 echo "${ECHO_PREFIX} Configure custom system dictionary on ${NEOLOGD_DIC_DIR}"
