@@ -22,6 +22,7 @@ set -u
 BASEDIR=$(cd $(dirname $0);pwd)
 PROGRAM_NAME=install-mecab-unidic-neologd
 ECHO_PREFIX="[${PROGRAM_NAME}] :"
+GREP_OPTIONS=""
 
 VERSION="install-mecab-unidic-neologd version 0.0.1"
 
