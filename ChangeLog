@@ -1,3 +1,10 @@
+# Release 20161130-01
+
+### Bug fix
+* seed/mecab-user-dict-seed.20161128.csv.xz
+	execute: Fix a seed data file (thanks @snowjobs_)
+	commit: https://github.com/neologd/mecab-unidic-neologd/commit/9eb017ff02b2cbb25dc2fb329344676a7c0a9b88
+
 # Release 20161128-01
 
 ### New seed data
