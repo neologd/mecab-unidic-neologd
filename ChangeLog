@@ -1,3 +1,10 @@
+# Release 20170306-01
+
+### New seed data
+* seed/mecab-user-dict-seed.20170306.csv.xz
+	execute: Periodic data update on 2017-03-06(Mon)
+	commit: https://github.com/neologd/mecab-unidic-neologd/commit/1d2e75c05678baa9bcd56bab758a3097ab6e7f30
+
 # Release 20170303-01
 
 ### New seed data
