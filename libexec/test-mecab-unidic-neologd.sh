@@ -44,7 +44,7 @@ echo $MECAB_UNIDIC_DIR
 
 echo "$ECHO_PREFIX Get buzz phrases"
 
-curl http://searchranking.yahoo.co.jp/realtime_buzz/ -o "/tmp/realtime_buzz.html"
+curl https://searchranking.yahoo.co.jp/realtime_buzz/ -o "/tmp/realtime_buzz.html"
 
 if [ $? != 0 ]; then
     echo ""
