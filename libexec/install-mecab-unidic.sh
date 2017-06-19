@@ -23,8 +23,7 @@ TMP_DIR_PATH=/var/tmp/build-unidic-mecab
 MECAB_UNIDIC_VERSION=2.1.2
 MECAB_UNIDIC_DIR_NAME=unidic-mecab-${MECAB_UNIDIC_VERSION}_src
 MECAB_UNIDIC_FILE_NAME=${MECAB_UNIDIC_DIR_NAME}.zip
-MECAB_UNIDIC_URL="http://osdn.jp/frs/redir.php?m=iij&f=%2Funidic%2F58338%2F${MECAB_UNIDIC_FILE_NAME}"
-
+MECAB_UNIDIC_URL="https://ja.osdn.net/frs/redir.php?m=ymu&f=%2Funidic%2F58338%2F${MECAB_UNIDIC_FILE_NAME}"
 ECHO_PREFIX='[install-mecab-unidic] :'
 
 echo "${ECHO_PREFIX} Start.."
