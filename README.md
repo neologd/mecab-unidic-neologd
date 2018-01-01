@@ -64,13 +64,12 @@ You should install following libraries using apt or yum, homebrew, source-code.
         - Use to test at the time of installation
         - If you install it using source code, you should select the UTF-8 as a character code
 
+              $ cd mecab-unidic-neologd
+              $ sudo ./libexec/install-mecab-unidic.sh
 
-    cd mecab-unidic-neologd
-    sudo ./libexec/install-mecab-unidic.sh
+          or
 
-or
-
-    ./configure; make; sudo make install
+              $ ./configure; make; sudo make install
 
 - xz
     - Use to decompress a xz package of a seed of mecab-unidic-neologd
@@ -80,32 +79,32 @@ Please install at any time other lack library.
 #### Examples
 - On CentOS
 
-    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+      $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
 
-    $ sudo yum install mecab git make curl xz
+      $ sudo yum install mecab git make curl xz
 
 - On Fedora
 
-    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+      $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
 
-    $ cd mecab-unidic-neologd
+      $ cd mecab-unidic-neologd
 
-    $ sudo yum install mecab mecab-devel git make curl xz
+      $ sudo yum install mecab mecab-devel git make curl xz
 
 - On Ubuntu
 
-    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+      $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
 
-    $ sudo aptitude install mecab libmecab-dev git make curl xz-utils
+      $ sudo aptitude install mecab libmecab-dev git make curl xz-utils
 
 - On MacOSX
 
-    $ brew install mecab mecab-unidic git curl xz
+      $ brew install mecab mecab-unidic git curl xz
 
 ### Preparation of installing
 A seed data of the dictionary will distribute via GitHub repository.
 
-In first time, you should execute the following command to 'git clone'.
+In first time, you should execute the following command to `git clone`.
 
     $ git clone --depth 1 https://github.com/neologd/mecab-unidic-neologd.git
 
@@ -113,7 +112,7 @@ OR
 
     $ git clone --depth 1 git@github.com:neologd/mecab-unidic-neologd.git
 
-If you need all log of mecab-unidic-neologd.git, you should clone the repository without '--depth 1'
+If you need all log of mecab-unidic-neologd.git, you should clone the repository without `--depth 1`
 
 ### How to install/update mecab-unidic-neologd
 #### Step.1
@@ -138,14 +137,14 @@ If you use following command, you can check useful command line option.
     $ ./bin/install-mecab-unidic-neologd -h
 
 ### How to use mecab-unidic-neologd
-When you want to use mecab-unidic-neologd, you should set the path of custom system dictionay(*/lib/mecab/dic/mecab-unidic-neologd/) as -d option of MeCab.
+When you want to use mecab-unidic-neologd, you should set the path of custom system dictionay(*/lib/mecab/dic/mecab-unidic-neologd/) as `-d` option of MeCab.
 
 #### Example (on CentOS)
-$ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
+    $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
 
 ## Example of output of MeCab
 ### When you use mecab-unidic-neologd
-    $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd
+    $ echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd
     10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。
     1       イチ    イチ    一      名詞-数詞
     0       ゼロ    ゼロ    ゼロ-zero       名詞-数詞
@@ -188,7 +187,7 @@ $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
 - Almost all of the entry of mecab-unidic-neologd has the value of furigana field.
 
 ### When you use unidic-mecab 2.1.2
-    $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/unidic
+    $ echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/unidic
     10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。
     1       イチ    イチ    一      名詞-数詞
     0       ゼロ    ゼロ    ゼロ-zero       名詞-数詞

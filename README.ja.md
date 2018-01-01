@@ -61,11 +61,11 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
         - インストール時のテストに使います
         - ソースコードからインストールするときは以下の手順で文字コードを UTF-8 インストールして下さい
 
-    cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+              $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
 
-または
+          または
 
-    ./configure; make; sudo make install
+              $ ./configure; make; sudo make install
 
 - xz
     - mecab-unidic-neologd のシードの解凍に unxz を使います
@@ -75,31 +75,31 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
 #### 例
 - CentOS の場合
 
-    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+      $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
 
-    $ sudo yum install mecab git make curl xz
+      $ sudo yum install mecab git make curl xz
 
 - Fedora の場合
 
-    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+      $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
 
-    $ sudo yum install mecab mecab-devel git make curl xz
+      $ sudo yum install mecab mecab-devel git make curl xz
 
 - Ubuntu の場合
 
-    $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
+      $ cd mecab-unidic-neologd; sudo ./libexec/install-mecab-unidic.sh
 
-    $ sudo aptitude install mecab libmecab-dev git make curl xz-utils
+      $ sudo aptitude install mecab libmecab-dev git make curl xz-utils
 
 - Mac OSX の場合
 
-    $ brew install mecab mecab-unidic git curl xz
+      $ brew install mecab mecab-unidic git curl xz
 
 ### mecab-unidic-neologd をインストールする準備
 
 辞書の元になるデータの配布と更新は GitHub 経由で行います。
 
-初回は以下のコマンドでgit cloneしてください。
+初回は以下のコマンドで`git clone`してください。
 
     $ git clone --depth 1 https://github.com/neologd/mecab-unidic-neologd.git
 
@@ -107,7 +107,7 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
 
     $ git clone --depth 1 git@github.com:neologd/mecab-unidic-neologd.git
 
-もしも、リポジトリの全変更履歴を入手したい方は「--depth 1」を消してcloneして下さい。
+もしも、リポジトリの全変更履歴を入手したい方は`--depth 1`を消してcloneして下さい。
 
 全変更履歴のデータサイズは変動しますが、ピーク時は約 1GB となり、かなり大容量ですのでご注意下さい。
 
@@ -135,7 +135,7 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
     $ ./bin/install-mecab-unidic-neologd -h
 
 ### mecab-unidic-neologd の使用方法
-mecab-unidic-neologd を使いたいときは、MeCab の -d オプションにカスタムシステム辞書のパス(例: */lib/mecab/dic/mecab-unidic-neologd/)を指定してください。
+mecab-unidic-neologd を使いたいときは、MeCab の `-d` オプションにカスタムシステム辞書のパス(例: */lib/mecab/dic/mecab-unidic-neologd/)を指定してください。
 
 #### 例 (CentOS 上でインストールした場合)
 
@@ -143,7 +143,7 @@ mecab-unidic-neologd を使いたいときは、MeCab の -d オプションに�
 
 ## MeCabの実行結果の例
 ### mecab-unidic-neologd をシステム辞書として使った場合
-    $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd
+    $ echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd
     10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。
     1       イチ    イチ    一      名詞-数詞
     0       ゼロ    ゼロ    ゼロ-zero       名詞-数詞
@@ -185,7 +185,7 @@ mecab-unidic-neologd を使いたいときは、MeCab の -d オプションに�
 - mecab-unidic-neologd に収録されているほとんどの語にフリガナが付いています
 
 ### unidic-mecab 2.1.2 を使った場合
-    $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/unidic
+    $ echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/unidic
     10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。
     1       イチ    イチ    一      名詞-数詞
     0       ゼロ    ゼロ    ゼロ-zero       名詞-数詞
