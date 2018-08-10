@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2015-2017 Toshinori Sato (@overlast)
+# Copyright (C) 2015-2018 Toshinori Sato (@overlast)
 #
 #       https://github.com/neologd/mecab-unidic-neologd
 #
@@ -20,7 +20,7 @@ set -e
 set -u
 
 BASEDIR=$(cd $(dirname $0);pwd)
-ECHO_PREFIX="[test-mecab-unidic-neologd] :"
+ECHO_PREFIX="[test-mecab-unidic-NEologd] :"
 GREP_OPTIONS=""
 
 echo "$ECHO_PREFIX Start.."
@@ -41,28 +41,26 @@ MECAB_UNIDIC_DIR=${BASEDIR}/../build/unidic-mecab-2.1.2_src-neologd-${YMD}
 
 echo $MECAB_UNIDIC_DIR
 
-
 echo "$ECHO_PREFIX Get buzz phrases"
-
-curl https://searchranking.yahoo.co.jp/realtime_buzz/ -o "/tmp/realtime_buzz.html"
+CURRENT_UNIXTIME=`date +%s`
+curl 'https://search.yahoo.co.jp/?ajax=1&prop=realtime&_=${CURRENT_UNIXTIME}' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: ja-JP,ja;q=0.9,en-US;q=0.8,en;q=0.7' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.33 Safari/537.36' -H 'accept: application/json, text/javascript, */*; q=0.01' -H 'referer: https://search.yahoo.co.jp/' -H 'authority: search.yahoo.co.jp' -H 'x-requested-with: XMLHttpRequest' --compressed -o "/tmp/realtime_buzz.json"
 
 if [ $? != 0 ]; then
     echo ""
     echo "$ECHO_PREFIX Failed to get the buzz phrases"
-    echo "$ECHO_PREFIX Please check your network to download 'http://searchranking.yahoo.co.jp/realtime_buzz/'"
+    echo "$ECHO_PREFIX Please check your network to download 'https://search.yahoo.co.jp/#!/realtime'"
     exit 1;
 fi
 
-sed -i -e "/\n/d" /tmp/realtime_buzz.html
-cat /tmp/realtime_buzz.html | perl -ne '$l = $_;  if ($l =~ m|<h3><a href="https?://rdsig\.yahoo\.co\.jp.+?">(.+)</a></h3>|g){ print $1."\n";}' > /tmp/buzz_phrase
-rm /tmp/realtime_buzz.html
+cat /tmp/realtime_buzz.json | perl -Xpne 's/\\u([0-9a-fA-F]{4})/chr(hex($1))/eg' | perl -ne '$l = $_; while ($l =~ m|<a [^>]+realtime[^>]+>([^<]+)<\\/a>|g) {print $1."\n"}' > /tmp/buzz_phrase
+rm /tmp/realtime_buzz.json
 
 PHRASE_FILE=/tmp/buzz_phrase
 if [ ! -s ${PHRASE_FILE} ]; then
-   PHRASE_FILE=""#${BASEDIR}/../misc/buzz_phrase_201402181610
+   PHRASE_FILE=""
 fi
 
-echo "$ECHO_PREFIX Get difference between default system dictionary and mecab-unidic-neologd"
+echo "$ECHO_PREFIX Get difference between default system dictionary and mecab-unidic-NEologd"
 
 cat /tmp/buzz_phrase| mecab -Owakati -d ${MECAB_DIC_DIR}/unidic > /tmp/buzz_phrase_tokenized_using_defdic
 cat /tmp/buzz_phrase| mecab -Owakati -d ${MECAB_UNIDIC_DIR} > /tmp/buzz_phrase_tokenized_using_neologismdic
@@ -76,7 +74,7 @@ if [ -s /tmp/buzz_phrase_tokenized_diff ]; then
     echo "unidic-mecab 2.1.2" > /tmp/buzz_phrase_tokenized_using_defdic
     cat /tmp/buzz_phrase| mecab -Owakati -d ${MECAB_DIC_DIR}/unidic >> /tmp/buzz_phrase_tokenized_using_defdic
 
-    echo "$ECHO_PREFIX Tokenize phrase using mecab-unidic-neologd"
+    echo "$ECHO_PREFIX Tokenize phrase using mecab-unidic-NEologd"
     echo "mecab-unidic-NEologd" > /tmp/buzz_phrase_tokenized_using_neologismdic
     cat /tmp/buzz_phrase| mecab -Owakati -d ${MECAB_UNIDIC_DIR} >> /tmp/buzz_phrase_tokenized_using_neologismdic
 
@@ -85,12 +83,12 @@ if [ -s /tmp/buzz_phrase_tokenized_diff ]; then
     /usr/bin/diff -y -W60 --side-by-side --suppress-common-lines /tmp/buzz_phrase_tokenized_using_defdic /tmp/buzz_phrase_tokenized_using_neologismdic > /tmp/buzz_phrase_tokenized_diff
     set -e
 
-    echo "$ECHO_PREFIX Please check difference between default system dictionary and mecab-unidic-neologd"
+    echo "$ECHO_PREFIX Please check difference between default system dictionary and mecab-unidic-NEologd"
     echo ""
     cat /tmp/buzz_phrase_tokenized_diff
     echo ""
 else
-    echo "$ECHO_PREFIX Something wrong. You shouldn't install mecab-unidic-neologd yet."
+    echo "$ECHO_PREFIX Something wrong. You shouldn't install mecab-unidic-NEologd yet."
 fi
 
 rm /tmp/buzz_phrase
