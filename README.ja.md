@@ -2,12 +2,12 @@
 [![Build Status](https://travis-ci.org/neologd/mecab-unidic-neologd.svg?branch=master)](https://travis-ci.org/neologd/mecab-unidic-neologd)
 
 ## 詳細な情報
-mecab-unidic-neologd に関する詳細な情報(サンプルコードなど)は以下の Wiki に書いてあります。
+mecab-unidic-NEologd に関する詳細な情報(サンプルコードなど)は以下の Wiki に書いてあります。
 
 - https://github.com/neologd/mecab-unidic-neologd/wiki/Home.ja
 
-## mecab-unidic-neologd とは
-mecab-unidic-neologd は、UniDic に多数のWeb上の言語資源から得た新語や固有表現、絵文字などのエントリを足して MeCab のシステム辞書としてインストールするためのシードデータとスクリプト群のセットです。
+## mecab-unidic-NEologd とは
+mecab-unidic-NEologd は、UniDic に多数のWeb上の言語資源から得た新語や固有表現、絵文字などのエントリを足して MeCab のシステム辞書としてインストールするためのシードデータとスクリプト群のセットです。
 
 シードデータの性質上、構築されるシステム辞書には国語研短単位の条件を満たさないエントリも入ります。
 
@@ -17,7 +17,7 @@ UniDic を使用してテキストデータから特徴ベクトルを生成す�
 
 ## 特徴
 ### 利点
-- UniDic には含まれていない固有表現などの語の表層(表記)とフリガナの組を約326万組(重複エントリを含む)採録しています
+- UniDic には含まれていない固有表現などの語の表層(表記)とフリガナの組を約329万組(重複エントリを含む)採録しています
 - この辞書の更新は開発サーバ上で自動的におこなわれます
     - 少なくとも毎週 2 回更新される予定です
             - 月曜日と木曜日
@@ -68,7 +68,7 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
     ./configure; make; sudo make install
 
 - xz
-    - mecab-unidic-neologd のシードの解凍に unxz を使います
+    - mecab-unidic-NEologd のシードの解凍に unxz を使います
 
 他にも足りないものがあったら適時インストールして下さい。
 
@@ -95,7 +95,7 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
 
     $ brew install mecab mecab-unidic git curl xz
 
-### mecab-unidic-neologd をインストールする準備
+### mecab-unidic-NEologd をインストールする準備
 
 辞書の元になるデータの配布と更新は GitHub 経由で行います。
 
@@ -111,7 +111,7 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
 
 全変更履歴のデータサイズは変動しますが、ピーク時は約 1GB となり、かなり大容量ですのでご注意下さい。
 
-### mecab-unidic-neologd のインストール/更新
+### mecab-unidic-NEologd のインストール/更新
 #### Step.1
 上記の準備でcloneしたリポジトリに移動します。
 
@@ -134,15 +134,15 @@ apt、yum や homebrew でインストールするか、自前でコンパイル
 
     $ ./bin/install-mecab-unidic-neologd -h
 
-### mecab-unidic-neologd の使用方法
-mecab-unidic-neologd を使いたいときは、MeCab の -d オプションにカスタムシステム辞書のパス(例: */lib/mecab/dic/mecab-unidic-neologd/)を指定してください。
+### mecab-unidic-NEologd の使用方法
+mecab-unidic-NEologd を使いたいときは、MeCab の -d オプションにカスタムシステム辞書のパス(例: */lib/mecab/dic/mecab-unidic-neologd/)を指定してください。
 
 #### 例 (CentOS 上でインストールした場合)
 
     $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
 
 ## MeCabの実行結果の例
-### mecab-unidic-neologd をシステム辞書として使った場合
+### mecab-unidic-NEologd をシステム辞書として使った場合
     $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd
     10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。
     1       イチ    イチ    一      名詞-数詞
@@ -179,10 +179,10 @@ mecab-unidic-neologd を使いたいときは、MeCab の -d オプションに�
     EOS
 
 #### どこに効果が出ている?
-- Mecab は mecab-unidic-neologd に収録された語をひとつの語として分割しました
+- Mecab は mecab-unidic-NEologd に収録された語をひとつの語として分割しました
     - 「中居正広のミになる図書館」は2011年後半に生まれた新しい語です
         - この語はWeb上の言語資源が更新されたのでひとつの語として分割されました
-- mecab-unidic-neologd に収録されているほとんどの語にフリガナが付いています
+- mecab-unidic-NEologd に収録されているほとんどの語にフリガナが付いています
 
 ### unidic-mecab 2.1.2 を使った場合
     $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/unidic
@@ -255,6 +255,22 @@ mecab-unidic-neologd を使いたいときは、MeCab の -d オプションに�
 
 もしも mecab-unidic-NEologd を論文から参照して下さる場合は、以下の bibtex をご利用ください。
 
+    @INPROCEEDINGS{sato2017mecabipadicneologdnlp2017,
+        author    = {佐藤敏紀, 橋本泰一, 奥村学},
+        title     = {単語分かち書き辞書 mecab-ipadic-NEologd の実装と情報検索における効果的な使用方法の検討},
+        booktitle = "言語処理学会第23回年次大会(NLP2017)",
+        year      = "2017",
+        pages     = "NLP2017-B6-1",
+        publisher = "言語処理学会",
+    }
+    @INPROCEEDINGS{sato2016neologdipsjnl229,
+        author    = {佐藤敏紀, 橋本泰一, 奥村学},
+        title     = {単語分かち書き用辞書生成システム NEologd の運用 — 文書分類を例にして —},
+        booktitle = "自然言語処理研究会研究報告",
+        year      = "2016",
+        pages     = "NL-229-15",
+        publisher = "情報処理学会",
+    }
     @misc{sato2015mecabunidicneologd,
         title  = {Neologism dictionary based on the language resources on the Web for unidic-mecab},
         author = {Toshinori, Sato},
@@ -263,7 +279,7 @@ mecab-unidic-neologd を使いたいときは、MeCab の -d オプションに�
     }
 
 ## Copyrights
-Copyright (c) 2015-2017 Toshinori Sato (@overlast) All rights reserved.
+Copyright (c) 2015-2018 Toshinori Sato (@overlast) All rights reserved.
 
 ライセンスは Apache License, Version 2.0 です。下記をご参照下さい。
 

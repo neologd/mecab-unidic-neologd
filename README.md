@@ -12,7 +12,7 @@ You can find more detailed documentation and examples in the following wiki.
 - https://github.com/neologd/mecab-unidic-neologd/wiki/Home
 
 ## Overview
-mecab-unidic-neologd is a set of a seed data of system dictionary for adding entries to unidic-mecab and scripts to install the synthesized dictionary as a system dictionary of MeCab.
+mecab-unidic-NEologd is a set of a seed data of system dictionary for adding entries to unidic-mecab and scripts to install the synthesized dictionary as a system dictionary of MeCab.
 
 Due to the nature of the seed data of system dictionary, the synthesized dictionary includes entries that do not satisfy the condition of Short Unit Word of National Institute for Japanese Language and Linguistics.
 
@@ -22,7 +22,7 @@ When you build a feature vector of text data using UniDic or do text mining usin
 
 ## Pros and Cons
 ### Pros
-- Recorded about 3.26 million pairs(including duplicate entries) of surface/furigana(kana indicating the pronunciation of kanji) of the words such as the named entity that can not be tokenized correctly using default system dictionary of MeCab.
+- Recorded about 3.29 million pairs(including duplicate entries) of surface/furigana(kana indicating the pronunciation of kanji) of the words such as the named entity that can not be tokenized correctly using default system dictionary of MeCab.
 - Update process of this dictionary will automatically run on development server.
     - I'm planning to renew this dictionary at least updating twice weekly
         - Every Monday and Thursday
@@ -49,7 +49,7 @@ When you build a feature vector of text data using UniDic or do text mining usin
 ## Getting started
 ### Dependencies
 
-We build mecab-unidic-neologd using the source code of mecab-unidic at installing phase.
+We build mecab-unidic-NEologd using the source code of mecab-unidic at installing phase.
 
 You should install following libraries using apt or yum, homebrew, source-code.
 
@@ -73,7 +73,7 @@ or
     ./configure; make; sudo make install
 
 - xz
-    - Use to decompress a xz package of a seed of mecab-unidic-neologd
+    - Use to decompress a xz package of a seed of mecab-unidic-NEologd
 
 Please install at any time other lack library.
 
@@ -115,7 +115,7 @@ OR
 
 If you need all log of mecab-unidic-neologd.git, you should clone the repository without '--depth 1'
 
-### How to install/update mecab-unidic-neologd
+### How to install/update mecab-unidic-NEologd
 #### Step.1
 Move to a directory of the repository which was cloned in the above preparation.
 
@@ -123,7 +123,7 @@ Move to a directory of the repository which was cloned in the above preparation.
 
 #### Step.2
 
-You can install or can update(overwritten) the recent mecab-unidic-neologd by following command.
+You can install or can update(overwritten) the recent mecab-unidic-NEologd by following command.
 
     $ ./bin/install-mecab-unidic-neologd -n
 
@@ -137,14 +137,14 @@ If you use following command, you can check useful command line option.
 
     $ ./bin/install-mecab-unidic-neologd -h
 
-### How to use mecab-unidic-neologd
-When you want to use mecab-unidic-neologd, you should set the path of custom system dictionay(*/lib/mecab/dic/mecab-unidic-neologd/) as -d option of MeCab.
+### How to use mecab-unidic-NEologd
+When you want to use mecab-unidic-NEologd, you should set the path of custom system dictionay(*/lib/mecab/dic/mecab-unidic-neologd/) as -d option of MeCab.
 
 #### Example (on CentOS)
 $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
 
 ## Example of output of MeCab
-### When you use mecab-unidic-neologd
+### When you use mecab-unidic-NEologd
     $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd
     10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。
     1       イチ    イチ    一      名詞-数詞
@@ -182,10 +182,10 @@ $ mecab -d /usr/local/lib/mecab/dic/mecab-unidic-neologd/
 
 #### What's the point of the above result
 
-- MeCab parsed the words which are recorded in mecab-unidic-neologd as a sinble word.
+- MeCab parsed the words which are recorded in mecab-unidic-NEologd as a sinble word.
     - "中居正広のミになる図書館(Masahiro Nakai's library to improve an ability)" is a new word.
         - This word parsed as a single word because of updating of the language resources on Web.
-- Almost all of the entry of mecab-unidic-neologd has the value of furigana field.
+- Almost all of the entry of mecab-unidic-NEologd has the value of furigana field.
 
 ### When you use unidic-mecab 2.1.2
     $echo "10日放送の「中居正広のミになる図書館」（テレビ朝日系）で、SMAPの中居正広が、篠原信一の過去の勘違いを明かす一幕があった。" | mecab -d /usr/local/lib/mecab/dic/unidic
@@ -253,6 +253,22 @@ If you are the beginner of NLP, I recommend that you use the latest version of m
 
 Please use the following bibtex, when you refer mecab-unidic-NEologd from your papers.
 
+    @INPROCEEDINGS{sato2017mecabipadicneologdnlp2017,
+        author    = {Toshinori Sato, Taiichi Hashimoto and Manabu Okumura},
+        title     = {Implementation of a word segmentation dictionary called mecab-ipadic-NEologd and study on how to use it effectively for information retrieval (in Japanese)},
+        booktitle = "Proceedings of the Twenty-three Annual Meeting of the Association for Natural Language Processing",
+        year      = "2017",
+        pages     = "NLP2017-B6-1",
+        publisher = "The Association for Natural Language Processing",
+    }
+    @INPROCEEDINGS{sato2016neologdipsjnl229,
+        author    = {Toshinori Sato, Taiichi Hashimoto and Manabu Okumura},
+        title     = {Operation of a word segmentation dictionary generation system called NEologd (in Japanese)},
+        booktitle = "Information Processing Society of Japan, Special Interest Group on Natural Language Processing (IPSJ-SIGNL)",
+        year      = "2016",
+        pages     = "NL-229-15",
+        publisher = "Information Processing Society of Japan",
+    }
     @misc{sato2015mecabunidicneologd,
         title  = {Neologism dictionary based on the language resources on the Web for unidic-mecab},
         author = {Toshinori, Sato},
@@ -261,7 +277,7 @@ Please use the following bibtex, when you refer mecab-unidic-NEologd from your p
     }
 
 ## Copyrights
-Copyright (c) 2015-2017 Toshinori Sato (@overlast) All rights reserved.
+Copyright (c) 2015-2018 Toshinori Sato (@overlast) All rights reserved.
 
 We select the 'Apache License, Version 2.0'. Please check following link.
 
