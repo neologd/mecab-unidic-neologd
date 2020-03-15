@@ -22,7 +22,7 @@ When you build a feature vector of text data using UniDic or do text mining usin
 
 ## Pros and Cons
 ### Pros
-- Recorded about 3.25 million pairs(including duplicate entries) of surface/furigana(kana indicating the pronunciation of kanji) of the words such as the named entity that can not be tokenized correctly using default system dictionary of MeCab.
+- Recorded about 3.345 million pairs(including duplicate entries) of surface/furigana(kana indicating the pronunciation of kanji) of the words such as the named entity that can not be tokenized correctly using default system dictionary of MeCab.
 - Update process of this dictionary will automatically run on development server.
     - I'm planning to renew this dictionary at least updating twice weekly
         - Every Monday and Thursday

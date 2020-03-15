@@ -1,3 +1,19 @@
+# Release 20200315-01
+
+### New seed data
+* seed/mecab-user-dict-seed.20200315.csv.xz
+	execute: 2020-03-15(Sun) is the 5th anniversary since the first release
+		- We have received over 2000 GitHub Stars. Thank you !!
+		- We will continue to update and improve for 2500 Stars and the 6th anniversary
+	commit: https://github.com/neologd/mecab-unidic-neologd/commit/463e9843394b349b1e266e694c91a34d1a73a0ac
+
+# Release 20200312-01
+
+### New seed data
+* seed/mecab-user-dict-seed.20200312.csv.xz
+	execute: Nonperiodic data update on 2020-03-12(Thu)
+	commit: https://github.com/neologd/mecab-unidic-neologd/commit/d7cfccc1b9292d6d6f8726ab01c20032bb72d060
+
 # Release 20200130-01
 
 ### New seed data
