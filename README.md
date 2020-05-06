@@ -32,7 +32,7 @@ When you build a feature vector of text data using UniDic or do text mining usin
         - [Japanese postal code number data download (ken_all.lzh)](http://www.post.japanpost.jp/zipcode/download.html)
         - [The name-of-the-station list of the Japan whole country](http://www5a.biglobe.ne.jp/~harako/data/station.htm)
         - [The entry data of the person name (last name / first name)](http://togetter.com/li/111529)
-        - All manually annotated entry data for Unicode emoji
+        - All manually annotated entry data for emoji from Unicode 10.0 and Emoji 5.0
         - A lot of documents, which crawled from Web
     - I'm planning to record the words such as the named entity, which will be extracted from other new language resource.
 

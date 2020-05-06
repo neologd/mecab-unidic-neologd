@@ -27,7 +27,7 @@ UniDic を使用してテキストデータから特徴ベクトルを生成す�
         - [郵便番号データダウンロード](http://www.post.japanpost.jp/zipcode/download.html)
         - [日本全国駅名一覧のコーナー](http://www5a.biglobe.ne.jp/~harako/data/station.htm)
         - [人名(姓/名)エントリデータ](http://togetter.com/li/111529)
-        - Unicode 6.0 以下の絵文字に手作業で読み仮名を付与したデータ
+        - Unicode 10.0/Emoji 5.0 以下の絵文字に手作業で読み仮名を付与したデータ
         - Web からクロールした大量の文書データ
     - 今後も他の新たな言語資源から抽出した固有表現などの語を採録する予定です
 
