@@ -1,3 +1,10 @@
+# Release 20200820-01
+
+### New seed data
+* seed/mecab-user-dict-seed.20200820.csv.xz
+	execute: Nonperiodic data update on 2020-08-20(Thu)
+	commit: https://github.com/neologd/mecab-unidic-neologd/commit/cee0050e4c8ae996cc80dd5bd931cf26bf26b46e
+
 # Release 20200813-01
 
 ### New seed data
